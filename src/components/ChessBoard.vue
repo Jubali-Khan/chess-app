@@ -7,11 +7,16 @@
 <section class="boardSection">
   <div v-for="(file, i) in board" :key="i">
 
-    <div v-for="(rank, j) in board[i]" :key="j" :id="board[i][j].file+board[i][j].rank" class="square" :class="classes(i, j)">
+    <div
+    v-for="(rank, j) in board[i]" :key="j"
+    :id="board[i][j].file+board[i][j].rank"
+    class="square"
+    :class="classes(i, j)"
+    >
         {{board[i][j].file}}{{board[i][j].rank}}
         <br>
         {{board[i][j].piece}}
-        <!-- <img class="figureImg" :src="imageUrl(board[i][j].piece)" /> -->
+        <img v-if="board[i][j].piece" class="figureImg" :srcset="board[i][j].imagePath" />
     </div>
 
   </div>
@@ -20,350 +25,413 @@
 </template>
 <script setup>
 const board = [
-  [
-    {
-      "file": "a",
-      "rank": 1,
-      "piece": {name: "wRook", history: null}
-    },
-    {
-      "file": "a",
-      "rank": 2,
-      "piece": "wPawn",
-      "function": movePawn
-    },
-    {
-      "file": "a",
-      "rank": 3,
-      "piece": ""
-    },
-    {
-      "file": "a",
-      "rank": 4,
-      "piece": ""
-    },
-    {
-      "file": "a",
-      "rank": 5,
-      "piece": ""
-    },
-    {
-      "file": "a",
-      "rank": 6,
-      "piece": ""
-    },
-    {
-      "file": "a",
-      "rank": 7,
-      "piece": "bPawn"
-    },
-    {
-      "file": "a",
-      "rank": 8,
-      "piece": "bRook"
-    }
-  ],
-  [
-    {
-      "file": "b",
-      "rank": 1,
-      "piece": "wKnight"
-    },
-    {
-      "file": "b",
-      "rank": 2,
-      "piece": "wPawn"
-    },
-    {
-      "file": "b",
-      "rank": 3,
-      "piece": ""
-    },
-    {
-      "file": "b",
-      "rank": 4,
-      "piece": ""
-    },
-    {
-      "file": "b",
-      "rank": 5,
-      "piece": ""
-    },
-    {
-      "file": "b",
-      "rank": 6,
-      "piece": ""
-    },
-    {
-      "file": "b",
-      "rank": 7,
-      "piece": "bPawn"
-    },
-    {
-      "file": "b",
-      "rank": 8,
-      "piece": "bKnight"
-    }
-  ],
-  [
-    {
-      "file": "c",
-      "rank": 1,
-      "piece": "wBishop"
-    },
-    {
-      "file": "c",
-      "rank": 2,
-      "piece": "wPawn"
-    },
-    {
-      "file": "c",
-      "rank": 3,
-      "piece": ""
-    },
-    {
-      "file": "c",
-      "rank": 4,
-      "piece": ""
-    },
-    {
-      "file": "c",
-      "rank": 5,
-      "piece": ""
-    },
-    {
-      "file": "c",
-      "rank": 6,
-      "piece": ""
-    },
-    {
-      "file": "c",
-      "rank": 7,
-      "piece": "bPawn"
-    },
-    {
-      "file": "c",
-      "rank": 8,
-      "piece": "bBishop"
-    }
-  ],
-  [
-    {
-      "file": "d",
-      "rank": 1,
-      "piece": "wQueen"
-    },
-    {
-      "file": "d",
-      "rank": 2,
-      "piece": "wPawn"
-    },
-    {
-      "file": "d",
-      "rank": 3,
-      "piece": ""
-    },
-    {
-      "file": "d",
-      "rank": 4,
-      "piece": ""
-    },
-    {
-      "file": "d",
-      "rank": 5,
-      "piece": ""
-    },
-    {
-      "file": "d",
-      "rank": 6,
-      "piece": ""
-    },
-    {
-      "file": "d",
-      "rank": 7,
-      "piece": "bPawn"
-    },
-    {
-      "file": "d",
-      "rank": 8,
-      "piece": "bQueen"
-    }
-  ],
-  [
-    {
-      "file": "e",
-      "rank": 1,
-      "piece": "wKing"
-    },
-    {
-      "file": "e",
-      "rank": 2,
-      "piece": "wPawn"
-    },
-    {
-      "file": "e",
-      "rank": 3,
-      "piece": ""
-    },
-    {
-      "file": "e",
-      "rank": 4,
-      "piece": ""
-    },
-    {
-      "file": "e",
-      "rank": 5,
-      "piece": ""
-    },
-    {
-      "file": "e",
-      "rank": 6,
-      "piece": ""
-    },
-    {
-      "file": "e",
-      "rank": 7,
-      "piece": "bPawn"
-    },
-    {
-      "file": "e",
-      "rank": 8,
-      "piece": "bKing"
-    }
-  ],
-  [
-    {
-      "file": "f",
-      "rank": 1,
-      "piece": "wBishop"
-    },
-    {
-      "file": "f",
-      "rank": 2,
-      "piece": "wPawn"
-    },
-    {
-      "file": "f",
-      "rank": 3,
-      "piece": ""
-    },
-    {
-      "file": "f",
-      "rank": 4,
-      "piece": ""
-    },
-    {
-      "file": "f",
-      "rank": 5,
-      "piece": ""
-    },
-    {
-      "file": "f",
-      "rank": 6,
-      "piece": ""
-    },
-    {
-      "file": "f",
-      "rank": 7,
-      "piece": "bPawn"
-    },
-    {
-      "file": "f",
-      "rank": 8,
-      "piece": "bBishop"
-    }
-  ],
-  [
-    {
-      "file": "g",
-      "rank": 1,
-      "piece": "wKnight"
-    },
-    {
-      "file": "g",
-      "rank": 2,
-      "piece": "wPawn"
-    },
-    {
-      "file": "g",
-      "rank": 3,
-      "piece": ""
-    },
-    {
-      "file": "g",
-      "rank": 4,
-      "piece": ""
-    },
-    {
-      "file": "g",
-      "rank": 5,
-      "piece": ""
-    },
-    {
-      "file": "g",
-      "rank": 6,
-      "piece": ""
-    },
-    {
-      "file": "g",
-      "rank": 7,
-      "piece": "bPawn"
-    },
-    {
-      "file": "g",
-      "rank": 8,
-      "piece": "bKnight"
-    }
-  ],
-  [
-    {
-      "file": "h",
-      "rank": 1,
-      "piece": "wRook"
-    },
-    {
-      "file": "h",
-      "rank": 2,
-      "piece": "wPawn"
-    },
-    {
-      "file": "h",
-      "rank": 3,
-      "piece": ""
-    },
-    {
-      "file": "h",
-      "rank": 4,
-      "piece": ""
-    },
-    {
-      "file": "h",
-      "rank": 5,
-      "piece": ""
-    },
-    {
-      "file": "h",
-      "rank": 6,
-      "piece": ""
-    },
-    {
-      "file": "h",
-      "rank": 7,
-      "piece": "bPawn"
-    },
-    {
-      "file": "h",
-      "rank": 8,
-      "piece": "bRook"
-    }
-  ]
+    [
+        {
+            "file": "a",
+            "rank": 1,
+            "piece": "wRook",
+            "imagePath": "./../../public/wRook.png"
+        },
+        {
+            "file": "a",
+            "rank": 2,
+            "piece": "wPawn",
+            "imagePath": "./../../public/wPawn.png"
+        },
+        {
+            "file": "a",
+            "rank": 3,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "a",
+            "rank": 4,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "a",
+            "rank": 5,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "a",
+            "rank": 6,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "a",
+            "rank": 7,
+            "piece": "bPawn",
+            "imagePath": "./../../public/bPawn.png"
+        },
+        {
+            "file": "a",
+            "rank": 8,
+            "piece": "bRook",
+            "imagePath": "./../../public/bRook.png"
+        }
+    ],
+    [
+        {
+            "file": "b",
+            "rank": 1,
+            "piece": "wKnight",
+            "imagePath": "./../../public/wKnight.png"
+        },
+        {
+            "file": "b",
+            "rank": 2,
+            "piece": "wPawn",
+            "imagePath": "./../../public/wPawn.png"
+        },
+        {
+            "file": "b",
+            "rank": 3,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "b",
+            "rank": 4,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "b",
+            "rank": 5,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "b",
+            "rank": 6,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "b",
+            "rank": 7,
+            "piece": "bPawn",
+            "imagePath": "./../../public/bPawn.png"
+        },
+        {
+            "file": "b",
+            "rank": 8,
+            "piece": "bKnight",
+            "imagePath": "./../../public/bKnight.png"
+        }
+    ],
+    [
+        {
+            "file": "c",
+            "rank": 1,
+            "piece": "wBishop",
+            "imagePath": "./../../public/wBishop.png"
+        },
+        {
+            "file": "c",
+            "rank": 2,
+            "piece": "wPawn",
+            "imagePath": "./../../public/wPawn.png"
+        },
+        {
+            "file": "c",
+            "rank": 3,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "c",
+            "rank": 4,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "c",
+            "rank": 5,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "c",
+            "rank": 6,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "c",
+            "rank": 7,
+            "piece": "bPawn",
+            "imagePath": "./../../public/bPawn.png"
+        },
+        {
+            "file": "c",
+            "rank": 8,
+            "piece": "bBishop",
+            "imagePath": "./../../public/bBishop.png"
+        }
+    ],
+    [
+        {
+            "file": "d",
+            "rank": 1,
+            "piece": "wQueen",
+            "imagePath": "./../../public/wQueen.png"
+        },
+        {
+            "file": "d",
+            "rank": 2,
+            "piece": "wPawn",
+            "imagePath": "./../../public/wPawn.png"
+        },
+        {
+            "file": "d",
+            "rank": 3,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "d",
+            "rank": 4,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "d",
+            "rank": 5,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "d",
+            "rank": 6,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "d",
+            "rank": 7,
+            "piece": "bPawn",
+            "imagePath": "./../../public/bPawn.png"
+        },
+        {
+            "file": "d",
+            "rank": 8,
+            "piece": "bQueen",
+            "imagePath": "./../../public/bQueen.png"
+        }
+    ],
+    [
+        {
+            "file": "e",
+            "rank": 1,
+            "piece": "wKing",
+            "imagePath": "./../../public/wKing.png"
+        },
+        {
+            "file": "e",
+            "rank": 2,
+            "piece": "wPawn",
+            "imagePath": "./../../public/wPawn.png"
+        },
+        {
+            "file": "e",
+            "rank": 3,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "e",
+            "rank": 4,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "e",
+            "rank": 5,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "e",
+            "rank": 6,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "e",
+            "rank": 7,
+            "piece": "bPawn",
+            "imagePath": "./../../public/bPawn.png"
+        },
+        {
+            "file": "e",
+            "rank": 8,
+            "piece": "bKing",
+            "imagePath": "./../../public/bKing.png"
+        }
+    ],
+    [
+        {
+            "file": "f",
+            "rank": 1,
+            "piece": "wBishop",
+            "imagePath": "./../../public/wBishop.png"
+        },
+        {
+            "file": "f",
+            "rank": 2,
+            "piece": "wPawn",
+            "imagePath": "./../../public/wPawn.png"
+        },
+        {
+            "file": "f",
+            "rank": 3,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "f",
+            "rank": 4,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "f",
+            "rank": 5,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "f",
+            "rank": 6,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "f",
+            "rank": 7,
+            "piece": "bPawn",
+            "imagePath": "./../../public/bPawn.png"
+        },
+        {
+            "file": "f",
+            "rank": 8,
+            "piece": "bBishop",
+            "imagePath": "./../../public/bBishop.png"
+        }
+    ],
+    [
+        {
+            "file": "g",
+            "rank": 1,
+            "piece": "wKnight",
+            "imagePath": "./../../public/wKnight.png"
+        },
+        {
+            "file": "g",
+            "rank": 2,
+            "piece": "wPawn",
+            "imagePath": "./../../public/wPawn.png"
+        },
+        {
+            "file": "g",
+            "rank": 3,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "g",
+            "rank": 4,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "g",
+            "rank": 5,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "g",
+            "rank": 6,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "g",
+            "rank": 7,
+            "piece": "bPawn",
+            "imagePath": "./../../public/bPawn.png"
+        },
+        {
+            "file": "g",
+            "rank": 8,
+            "piece": "bKnight",
+            "imagePath": "./../../public/bKnight.png"
+        }
+    ],
+    [
+        {
+            "file": "h",
+            "rank": 1,
+            "piece": "wRook",
+            "imagePath": "./../../public/wRook.png"
+        },
+        {
+            "file": "h",
+            "rank": 2,
+            "piece": "wPawn",
+            "imagePath": "./../../public/wPawn.png"
+        },
+        {
+            "file": "h",
+            "rank": 3,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "h",
+            "rank": 4,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "h",
+            "rank": 5,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "h",
+            "rank": 6,
+            "piece": "",
+            "imagePath": "./../../public/.png"
+        },
+        {
+            "file": "h",
+            "rank": 7,
+            "piece": "bPawn",
+            "imagePath": "./../../public/bPawn.png"
+        },
+        {
+            "file": "h",
+            "rank": 8,
+            "piece": "bRook",
+            "imagePath": "./../../public/bRook.png"
+        }
+    ]
 ]
 
 function movePawn(n) {
   // Contstraints:
-  // 1. handle 1st click
+  // 1. handle 1st click (from which square)
   // 2. show options
-  // 3. handling 2nd click
+  // 3. handling 2nd click (to which square)
   // 3.1 on a square where you can move the piece
   // 3.2 on a different square/piece
 }
@@ -399,7 +467,7 @@ function classes(file, rank) {
 }
 
 const imageUrl = (piece) => {
-  return `@/assets/${piece}.png`
+  return `./../../public/${piece}.png`
 }
 
   function logger() {
