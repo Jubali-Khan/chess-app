@@ -13,10 +13,11 @@
     class="square"
     :class="classes(i, j)"
     >
-        {{board[i][j].file}}{{board[i][j].rank}}
+        <!-- {{board[i][j].file}}{{board[i][j].rank}}
         <br>
-        {{board[i][j].piece}}
-        <img v-if="board[i][j].piece" class="figureImg" :srcset="board[i][j].imagePath" />
+        {{board[i][j].piece}} -->
+        <img v-if="board[i][j].piece" class="figureImg" :class="(/^(w|b)[Pawn]{1}/).test(board[i][j].piece) ? 'pawnSqueezer':''" :src="require('../assets/'+board[i][j].imagePath)" />
+        <!-- <img  class="figureImg" src="../assets/wKing.png" /> -->
     </div>
 
   </div>
@@ -30,49 +31,49 @@ const board = [
             "file": "a",
             "rank": 1,
             "piece": "wRook",
-            "imagePath": "./../../public/wRook.png"
+            "imagePath": "wRook.png"
         },
         {
             "file": "a",
             "rank": 2,
             "piece": "wPawn",
-            "imagePath": "./../../public/wPawn.png"
+            "imagePath": "wPawn.png"
         },
         {
             "file": "a",
             "rank": 3,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "a",
             "rank": 4,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "a",
             "rank": 5,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "a",
             "rank": 6,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "a",
             "rank": 7,
             "piece": "bPawn",
-            "imagePath": "./../../public/bPawn.png"
+            "imagePath": "bPawn.png"
         },
         {
             "file": "a",
             "rank": 8,
             "piece": "bRook",
-            "imagePath": "./../../public/bRook.png"
+            "imagePath": "bRook.png"
         }
     ],
     [
@@ -80,49 +81,49 @@ const board = [
             "file": "b",
             "rank": 1,
             "piece": "wKnight",
-            "imagePath": "./../../public/wKnight.png"
+            "imagePath": "wKnight.png"
         },
         {
             "file": "b",
             "rank": 2,
             "piece": "wPawn",
-            "imagePath": "./../../public/wPawn.png"
+            "imagePath": "wPawn.png"
         },
         {
             "file": "b",
             "rank": 3,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "b",
             "rank": 4,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "b",
             "rank": 5,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "b",
             "rank": 6,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "b",
             "rank": 7,
             "piece": "bPawn",
-            "imagePath": "./../../public/bPawn.png"
+            "imagePath": "bPawn.png"
         },
         {
             "file": "b",
             "rank": 8,
             "piece": "bKnight",
-            "imagePath": "./../../public/bKnight.png"
+            "imagePath": "bKnight.png"
         }
     ],
     [
@@ -130,49 +131,49 @@ const board = [
             "file": "c",
             "rank": 1,
             "piece": "wBishop",
-            "imagePath": "./../../public/wBishop.png"
+            "imagePath": "wBishop.png"
         },
         {
             "file": "c",
             "rank": 2,
             "piece": "wPawn",
-            "imagePath": "./../../public/wPawn.png"
+            "imagePath": "wPawn.png"
         },
         {
             "file": "c",
             "rank": 3,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "c",
             "rank": 4,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "c",
             "rank": 5,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "c",
             "rank": 6,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "c",
             "rank": 7,
             "piece": "bPawn",
-            "imagePath": "./../../public/bPawn.png"
+            "imagePath": "bPawn.png"
         },
         {
             "file": "c",
             "rank": 8,
             "piece": "bBishop",
-            "imagePath": "./../../public/bBishop.png"
+            "imagePath": "bBishop.png"
         }
     ],
     [
@@ -180,49 +181,49 @@ const board = [
             "file": "d",
             "rank": 1,
             "piece": "wQueen",
-            "imagePath": "./../../public/wQueen.png"
+            "imagePath": "wQueen.png"
         },
         {
             "file": "d",
             "rank": 2,
             "piece": "wPawn",
-            "imagePath": "./../../public/wPawn.png"
+            "imagePath": "wPawn.png"
         },
         {
             "file": "d",
             "rank": 3,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "d",
             "rank": 4,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "d",
             "rank": 5,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "d",
             "rank": 6,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "d",
             "rank": 7,
             "piece": "bPawn",
-            "imagePath": "./../../public/bPawn.png"
+            "imagePath": "bPawn.png"
         },
         {
             "file": "d",
             "rank": 8,
             "piece": "bQueen",
-            "imagePath": "./../../public/bQueen.png"
+            "imagePath": "bQueen.png"
         }
     ],
     [
@@ -230,49 +231,49 @@ const board = [
             "file": "e",
             "rank": 1,
             "piece": "wKing",
-            "imagePath": "./../../public/wKing.png"
+            "imagePath": "wKing.png"
         },
         {
             "file": "e",
             "rank": 2,
             "piece": "wPawn",
-            "imagePath": "./../../public/wPawn.png"
+            "imagePath": "wPawn.png"
         },
         {
             "file": "e",
             "rank": 3,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "e",
             "rank": 4,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "e",
             "rank": 5,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "e",
             "rank": 6,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "e",
             "rank": 7,
             "piece": "bPawn",
-            "imagePath": "./../../public/bPawn.png"
+            "imagePath": "bPawn.png"
         },
         {
             "file": "e",
             "rank": 8,
             "piece": "bKing",
-            "imagePath": "./../../public/bKing.png"
+            "imagePath": "bKing.png"
         }
     ],
     [
@@ -280,49 +281,49 @@ const board = [
             "file": "f",
             "rank": 1,
             "piece": "wBishop",
-            "imagePath": "./../../public/wBishop.png"
+            "imagePath": "wBishop.png"
         },
         {
             "file": "f",
             "rank": 2,
             "piece": "wPawn",
-            "imagePath": "./../../public/wPawn.png"
+            "imagePath": "wPawn.png"
         },
         {
             "file": "f",
             "rank": 3,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "f",
             "rank": 4,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "f",
             "rank": 5,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "f",
             "rank": 6,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "f",
             "rank": 7,
             "piece": "bPawn",
-            "imagePath": "./../../public/bPawn.png"
+            "imagePath": "bPawn.png"
         },
         {
             "file": "f",
             "rank": 8,
             "piece": "bBishop",
-            "imagePath": "./../../public/bBishop.png"
+            "imagePath": "bBishop.png"
         }
     ],
     [
@@ -330,49 +331,49 @@ const board = [
             "file": "g",
             "rank": 1,
             "piece": "wKnight",
-            "imagePath": "./../../public/wKnight.png"
+            "imagePath": "wKnight.png"
         },
         {
             "file": "g",
             "rank": 2,
             "piece": "wPawn",
-            "imagePath": "./../../public/wPawn.png"
+            "imagePath": "wPawn.png"
         },
         {
             "file": "g",
             "rank": 3,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "g",
             "rank": 4,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "g",
             "rank": 5,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "g",
             "rank": 6,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "g",
             "rank": 7,
             "piece": "bPawn",
-            "imagePath": "./../../public/bPawn.png"
+            "imagePath": "bPawn.png"
         },
         {
             "file": "g",
             "rank": 8,
             "piece": "bKnight",
-            "imagePath": "./../../public/bKnight.png"
+            "imagePath": "bKnight.png"
         }
     ],
     [
@@ -380,49 +381,49 @@ const board = [
             "file": "h",
             "rank": 1,
             "piece": "wRook",
-            "imagePath": "./../../public/wRook.png"
+            "imagePath": "wRook.png"
         },
         {
             "file": "h",
             "rank": 2,
             "piece": "wPawn",
-            "imagePath": "./../../public/wPawn.png"
+            "imagePath": "wPawn.png"
         },
         {
             "file": "h",
             "rank": 3,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "h",
             "rank": 4,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "h",
             "rank": 5,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "h",
             "rank": 6,
             "piece": "",
-            "imagePath": "./../../public/.png"
+            "imagePath": ".png"
         },
         {
             "file": "h",
             "rank": 7,
             "piece": "bPawn",
-            "imagePath": "./../../public/bPawn.png"
+            "imagePath": "bPawn.png"
         },
         {
             "file": "h",
             "rank": 8,
             "piece": "bRook",
-            "imagePath": "./../../public/bRook.png"
+            "imagePath": "bRook.png"
         }
     ]
 ]
@@ -467,7 +468,7 @@ function classes(file, rank) {
 }
 
 const imageUrl = (piece) => {
-  return `./../../public/${piece}.png`
+  return `${piece}.png`
 }
 
   function logger() {
@@ -508,8 +509,13 @@ img {
 }
 
 .figureImg {
-  width: 50px;
-  height: 50px;
+    margin-top: 18px;
+  width: 70px;
+  height: 70px;
   margin-inline: auto;
+}
+
+.pawnSqueezer {
+    width: 50px;
 }
 </style>
