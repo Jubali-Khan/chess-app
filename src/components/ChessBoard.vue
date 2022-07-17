@@ -11,19 +11,18 @@
     v-for="(rank, j) in board[i]" :key="j"
     :id="board[i][j].file+board[i][j].rank"
     class="square"
-    :class="classes(i, j)"
+    :class="classes(i, j)" @click="grabPiece" 
     >
         
-    
+        <img v-if="board[i][j].piece" class="figureImg" :class="(/^(w|b)[Pawn]{1}/).test(board[i][j].piece) ? 'pawnSqueezer':''" :src="require('../assets/'+board[i][j].imagePath)" />
         
-        <img v-if="board[i][j].piece" class="figureImg" :src="require('../assets/'+board[i][j].imagePath)" />
     </div>
 
   </div>
 </section>
 
 </template>
-<script >
+<script setup>
 const board = [
     [
         {
@@ -427,6 +426,12 @@ const board = [
     ]
 ]
 
+function grabPiece(e){
+    console.log(e.target)
+    
+}
+
+
 function movePawn(n) {
   // Contstraints:
   // 1. handle 1st click (from which square)
@@ -478,11 +483,11 @@ const imageUrl = (piece) => {
 </script>
 
 <style>
+
 img {
   width: 500px;
   height: 500px;
 }
-
 .boardSection {
     margin: 0 auto;
   width: 800px;
@@ -490,7 +495,6 @@ img {
   border: 1px solid black;
   display: flex;
 }
-
 .square {
   width: 100px;
   height: 100px;
@@ -499,22 +503,17 @@ img {
   display: grid;
   place-content: center;
 }
-
-
 .light {
   background-color: white;
 }
-
 .dark {
   background-color: rgb(126, 126, 126);
   color: white;
 }
-
 .figureImg {
   width: 60px;
   height: 60px;
   margin-inline: auto;
-
 }
 .figureImg:hover{   
     cursor: pointer;
@@ -522,5 +521,4 @@ img {
 .figureImg:active{
     cursor: grabbing;
 }
-
 </style>
