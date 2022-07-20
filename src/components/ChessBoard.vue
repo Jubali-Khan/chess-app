@@ -12,12 +12,15 @@
     :id="board[i][j].file+board[i][j].rank"
     class="square"
     :class="classes(i, j)"
+    @click="squareClickHandler(board[i][j])"
     >
-        <!-- {{board[i][j].file}}{{board[i][j].rank}}
-        <br>
-        {{board[i][j].piece}} -->
-        <img v-if="board[i][j].piece" class="figureImg" :class="(/^(w|b)[Pawn]{1}/).test(board[i][j].piece) ? 'pawnSqueezer':''" :src="require('../assets/'+board[i][j].imagePath)" />
-        <!-- <img  class="figureImg" src="../assets/wKing.png" /> -->
+        <img
+        v-if="board[i][j].piece"
+        class="figureImg"
+        :class="(/^(w|b)[Pawn]{1}/).test(board[i][j].piece) ? 'pawnSqueezer':''"
+        :src="require('../assets/'+board[i][j].imagePath)"
+        @click.stop="pieceClickHandler(board[i][j], i, j)"
+        />
     </div>
 
   </div>
@@ -25,6 +28,7 @@
 
 </template>
 <script setup>
+import {ref} from "vue"
 const board = [
     [
         {
@@ -428,37 +432,50 @@ const board = [
     ]
 ]
 
-function movePawn(n) {
-  // Contstraints:
-  // 1. handle 1st click (from which square)
-  // 2. show options
-  // 3. handling 2nd click (to which square)
-  // 3.1 on a square where you can move the piece
-  // 3.2 on a different square/piece
+function clickHandler(info) {
+    console.log("info:", info)
 }
 
 
 /*
--> data types and data structures for each piece according to its needs
-  - e.g. type Pawn = {
-    piece: string,
+Moving pieces:
+1. click and then select next position
+2. drag and drop (later on)
 
-  }
--> clickHandler
-  1. show options
-    - based on:
-      1. piece location show (legal)
-        1. capture possibilites
-        2. move possibilities
-      2.
--> afterMove Handler
-  - check for:
-    - checks
-    - checkmates
-    - niche moves:
-      - en passant
-      - promotions
+- click and move:
+1. 2 different click handlers on img element (piece) and on div element (square)
 */
+
+
+const pieceAndSquare = ref();
+
+function pieceClickHandler(currentSquare, i, j) {
+    console.log('pCK fired')
+
+    pieceAndSquare.value = [currentSquare.piece, currentSquare.imagePath, i, j]
+
+    /*
+    1. store current square's info in squareToClean (index in board array)
+    2. update pieceToMove from currentSquare's info
+    */
+}
+
+function squareClickHandler(targetSquare) {
+    console.log('sCK fired')
+    /*
+    1. update targetSquare's info ({..})
+    2. delete info from squareToClean
+    */
+
+console.log('targetSquare', targetSquare.piece)
+   targetSquare.piece = pieceAndSquare[0];
+   targetSquare.imagePath = pieceAndSquare[1];
+
+    const i = pieceAndSquare[2];
+    const j = pieceAndSquare[3];
+   board[i][j].piece = '';
+   board[i][j].imagePath = '';
+}
 
 
 
@@ -470,12 +487,6 @@ function classes(file, rank) {
 const imageUrl = (piece) => {
   return `${piece}.png`
 }
-
-  function logger() {
-      console.log("board", board);
-      console.log("colorClass", colorClass.value)
-  }
-
 </script>
 
 <style>
