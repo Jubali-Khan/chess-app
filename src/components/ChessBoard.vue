@@ -496,6 +496,7 @@ img {
 }
 
 .boardSection {
+    margin: 0 auto;
   width: 800px;
   height: 800px;
   border: 1px solid black;
@@ -507,6 +508,8 @@ img {
   height: 100px;
   border: 1px solid black;
   color: black;
+  display: grid;
+  place-content: center;
 }
 
 
@@ -520,13 +523,16 @@ img {
 }
 
 .figureImg {
-    margin-top: 18px;
-  width: 70px;
-  height: 70px;
-  margin-inline: auto;
+  width: 90px;
+  height: 90px;
+  
+}
+.figureImg:hover{   
+    cursor: pointer;
+}
+.figureImg:active{
+    cursor: grabbing;
 }
 
-.pawnSqueezer {
-    width: 50px;
-}
+
 </style>
