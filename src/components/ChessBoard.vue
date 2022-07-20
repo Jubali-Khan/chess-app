@@ -450,10 +450,10 @@ Moving pieces:
 const pieceAndSquare = ref();
 
 function pieceClickHandler(currentSquare, i, j) {
-    console.log('pCK fired')
+   
 
     pieceAndSquare.value = [currentSquare.piece, currentSquare.imagePath, i, j]
-
+ console.log(pieceAndSquare.value)
     /*
     1. store current square's info in squareToClean (index in board array)
     2. update pieceToMove from currentSquare's info
@@ -481,7 +481,9 @@ console.log('targetSquare', targetSquare.piece)
 
 
 function classes(file, rank) {
-  return file%2 === 0 ? (rank%2 === 0 ? 'light' : 'dark') : (rank%2 === 0 ? 'dark' : 'light')
+  /* return file%2 === 0 ? (rank%2 === 0 ? 'light' : 'dark') : (rank%2 === 0 ? 'light' : 'dark') */
+  const square= file + rank; // this works was thinking of adding +2 because when we loop we start from 0
+  return square%2===0?'dark' : 'light'    
 }
 
 const imageUrl = (piece) => {
