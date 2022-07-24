@@ -4,7 +4,7 @@
   <button @click="logger">log</button>
 
 
-<section class="boardSection">
+<section class="boardSection" id="board">
   <div v-for="(file, i) in board" :key="i">
 
     <div
@@ -24,7 +24,9 @@
     </div>
 
   </div>
+  
 </section>
+
 
 </template>
 <script setup>
@@ -184,8 +186,8 @@ const board = [
         {
             "file": "d",
             "rank": 1,
-            "piece": "wQueen",
-            "imagePath": "wQueen.png"
+            "piece": "wKing",
+            "imagePath": "wKing.png"
         },
         {
             "file": "d",
@@ -226,16 +228,16 @@ const board = [
         {
             "file": "d",
             "rank": 8,
-            "piece": "bQueen",
-            "imagePath": "bQueen.png"
+            "piece": "bKing",
+            "imagePath": "bKing.png"
         }
     ],
     [
         {
             "file": "e",
             "rank": 1,
-            "piece": "wKing",
-            "imagePath": "wKing.png"
+            "piece": "wQueen",
+            "imagePath": "wQueen.png"
         },
         {
             "file": "e",
@@ -276,8 +278,8 @@ const board = [
         {
             "file": "e",
             "rank": 8,
-            "piece": "bKing",
-            "imagePath": "bKing.png"
+            "piece": "bQueen",
+            "imagePath": "bQueen.png"
         }
     ],
     [
@@ -432,10 +434,11 @@ const board = [
     ]
 ]
 
-function clickHandler(info) {
+
+/* function clickHandler(info) {
     console.log("info:", info)
 }
-
+ */
 
 /*
 Moving pieces:
@@ -451,7 +454,6 @@ const pieceAndSquare = ref();
 
 function pieceClickHandler(currentSquare, i, j) {
    
-
     pieceAndSquare.value = [currentSquare.piece, currentSquare.imagePath, i, j]
  console.log(pieceAndSquare.value)
     /*
@@ -459,7 +461,6 @@ function pieceClickHandler(currentSquare, i, j) {
     2. update pieceToMove from currentSquare's info
     */
 }
-
 function squareClickHandler(targetSquare) {
     console.log('sCK fired')
     /*
@@ -467,14 +468,13 @@ function squareClickHandler(targetSquare) {
     2. delete info from squareToClean
     */
 
-console.log('targetSquare', targetSquare.piece)
-   targetSquare.piece = pieceAndSquare[0];
-   targetSquare.imagePath = pieceAndSquare[1];
-
-    const i = pieceAndSquare[2];
-    const j = pieceAndSquare[3];
+   targetSquare.piece = pieceAndSquare.value[0];
+   targetSquare.imagePath = pieceAndSquare.value[1];
+    const i = pieceAndSquare.value[2];
+    const j = pieceAndSquare.value[3];
    board[i][j].piece = '';
    board[i][j].imagePath = '';
+   console.log('targetSquare', targetSquare.piece)  
 }
 
 
@@ -483,7 +483,7 @@ console.log('targetSquare', targetSquare.piece)
 function classes(file, rank) {
   /* return file%2 === 0 ? (rank%2 === 0 ? 'light' : 'dark') : (rank%2 === 0 ? 'light' : 'dark') */
   const square= file + rank; // this works was thinking of adding +2 because when we loop we start from 0
-  return square%2===0?'dark' : 'light'    
+  return square%2===0?'light' : 'dark'    
 }
 
 const imageUrl = (piece) => {
