@@ -24,14 +24,14 @@
     </div>
 
   </div>
-  
+
 </section>
 
 
 </template>
 <script setup>
-import {ref} from "vue"
-const board = [
+import {reactive, ref} from "vue"
+const board = reactive([
     [
         {
             "file": "a",
@@ -432,7 +432,7 @@ const board = [
             "imagePath": "bRook.png"
         }
     ]
-]
+])
 
 
 /* function clickHandler(info) {
@@ -453,9 +453,9 @@ Moving pieces:
 const pieceAndSquare = ref();
 
 function pieceClickHandler(currentSquare, i, j) {
-   
+
     pieceAndSquare.value = [currentSquare.piece, currentSquare.imagePath, i, j]
- console.log(pieceAndSquare.value)
+    console.log(pieceAndSquare.value)
     /*
     1. store current square's info in squareToClean (index in board array)
     2. update pieceToMove from currentSquare's info
@@ -465,16 +465,21 @@ function squareClickHandler(targetSquare) {
     console.log('sCK fired')
     /*
     1. update targetSquare's info ({..})
-    2. delete info from squareToClean
+    2. delete info from pieceAndSquare
     */
 
-   targetSquare.piece = pieceAndSquare.value[0];
-   targetSquare.imagePath = pieceAndSquare.value[1];
+    // update the target square's info
+    targetSquare.piece = pieceAndSquare.value[0];
+    targetSquare.imagePath = pieceAndSquare.value[1];
+
+    // store the index of the original square (from which the piece is supposed to move)
     const i = pieceAndSquare.value[2];
     const j = pieceAndSquare.value[3];
-   board[i][j].piece = '';
-   board[i][j].imagePath = '';
-   console.log('targetSquare', targetSquare.piece)  
+
+    // now clean the original square
+    board[i][j].piece = '';
+    board[i][j].imagePath = '';
+    console.log('targetSquare', targetSquare)
 }
 
 
@@ -483,7 +488,7 @@ function squareClickHandler(targetSquare) {
 function classes(file, rank) {
   /* return file%2 === 0 ? (rank%2 === 0 ? 'light' : 'dark') : (rank%2 === 0 ? 'light' : 'dark') */
   const square= file + rank; // this works was thinking of adding +2 because when we loop we start from 0
-  return square%2===0?'light' : 'dark'    
+  return square%2===0?'light' : 'dark'
 }
 
 const imageUrl = (piece) => {
@@ -527,9 +532,9 @@ img {
 .figureImg {
   width: 90px;
   height: 90px;
-  
+
 }
-.figureImg:hover{   
+.figureImg:hover{
     cursor: pointer;
 }
 .figureImg:active{
